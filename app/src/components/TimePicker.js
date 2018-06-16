@@ -17,6 +17,7 @@ class TimeInputField extends Component {
     static propTypes = {
         label: PropTypes.string,
         value: MomentPropTypes.momentObj,
+        valid: PropTypes.bool,
         onChange: PropTypes.func
     }
 
@@ -71,9 +72,10 @@ class TimeInputField extends Component {
         // We need to adjust our hour based on whether we are AM or PM
         // Moment uses 24-hour when using .hour()
         let hour = this.state.time.hour()
+        console.log(`onMeridiemChanged - ${value} `, hour)
         switch (value.toLowerCase()) {
             case "am":
-                if (hour > 12) hour -= 12
+                if (hour >= 12) hour -= 12
                 break
             case "pm":
                 if (hour < 12) hour += 12
@@ -102,8 +104,11 @@ class TimeInputField extends Component {
     }
 
     render() {
+        let className = "timepicker"
+        if (!this.props.valid) className += " invalid"
+
         return (
-            <div className="timepicker">
+            <div className={className}>
                 <div className="timepicker-label">{this.props.label}</div>
                 <TimePicker
                     focused={this.state.focused}
@@ -113,7 +118,7 @@ class TimeInputField extends Component {
                     onFocusChange={this.onFocusChange}
                     time={toString(this.state.time)}
                     timeMode="12"
-                    draggable={false}
+                    draggable={true}
                 />
             </div>
         )

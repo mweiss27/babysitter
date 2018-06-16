@@ -3,6 +3,12 @@
     width: 200px;
     margin: 0 15px;
 
+    &.invalid {
+        > .time_picker_container {
+            border: 2px solid red;
+        }
+    }
+
     > .timepicker-label {
         font-size: 14pt;
         font-weight: bold;
@@ -10,6 +16,6 @@
     }
 
     > .time_picker_container {
-        border: 1px solid black;
+        border: 2px solid black;
     }
 }

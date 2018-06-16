@@ -1,0 +1,13 @@
+#calculation-result {
+    display: flex;
+    align-items: center;
+    font-size: 14pt;
+
+    > #result-pretext {
+        font-weight: normal;
+    }
+
+    > #result-value {
+        font-weight: bold;
+    }
+}

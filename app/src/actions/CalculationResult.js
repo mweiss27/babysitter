@@ -1,8 +1,8 @@
-export const SET_CALCULATION_RESULT = "SET_CALCULATION_RESULT"
+export const SET_RESULT = "SET_RESULT"
 
 export const setCalculationResult = result => {
     return {
-        type: SET_CALCULATION_RESULT,
+        type: SET_RESULT,
         payload: result
     }
 }

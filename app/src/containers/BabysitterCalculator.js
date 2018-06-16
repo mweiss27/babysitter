@@ -7,7 +7,10 @@ import TimePicker from "components/TimePicker.js"
 
 import { Button } from "react-bootstrap"
 import { setStartTime, setBedTime, setEndTime } from "actions/BabysitterCalculator.js"
+import { setCalculationResult } from "actions/CalculationResult.js"
+
 import { isStartTimeValid, isBedTimeValid, isEndTimeValid } from "util/Time.js"
+import { calculateResult } from "util/Calculator.js"
 
 import "styles/babysittercalculator.scss"
 /**
@@ -36,7 +39,16 @@ class BabysitterCalculator extends Component {
     }
 
     @autobind
-    performCalculation() {}
+    performCalculation() {
+        let start = this.props.babysitterCalculator.startTime
+        let bed = this.props.babysitterCalculator.bedTime
+        let end = this.props.babysitterCalculator.endTime
+
+        let result = calculateResult(start, bed, end)
+
+        console.log(`Setting calculation result to ${result}`)
+        this.props.setCalculationResult(result)
+    }
 
     render() {
         let start = this.props.babysitterCalculator.startTime
@@ -78,7 +90,9 @@ function mapDispatchToProps(dispatch) {
         {
             setStartTime,
             setBedTime,
-            setEndTime
+            setEndTime,
+
+            setCalculationResult
         },
         dispatch
     )

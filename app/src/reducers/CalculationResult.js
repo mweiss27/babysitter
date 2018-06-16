@@ -1,7 +1,7 @@
 import { SET_RESULT } from "actions/CalculationResult.js"
 
 const initialState = {
-    result: 0
+    result: null
 }
 
 export default function(state = initialState, action) {
