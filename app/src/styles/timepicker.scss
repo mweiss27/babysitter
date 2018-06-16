@@ -1,3 +1,15 @@
 .timepicker {
+    display: inline-block;
     width: 200px;
+    margin: 0 15px;
+
+    > .timepicker-label {
+        font-size: 14pt;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    > .time_picker_container {
+        border: 1px solid black;
+    }
 }

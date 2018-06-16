@@ -1,0 +1,12 @@
+#babysitter-calculator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 50px;
+
+    > #babysitter-timepickers {
+        flex-direction: row;
+        margin-bottom: 10px;
+    }
+}

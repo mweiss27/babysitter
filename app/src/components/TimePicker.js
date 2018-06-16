@@ -15,6 +15,7 @@ import "react-times/css/material/default.css"
  */
 class TimeInputField extends Component {
     static propTypes = {
+        label: PropTypes.string,
         value: MomentPropTypes.momentObj,
         onChange: PropTypes.func
     }
@@ -94,6 +95,7 @@ class TimeInputField extends Component {
     render() {
         return (
             <div className="timepicker">
+                <div className="timepicker-label">{this.props.label}</div>
                 <TimePicker
                     focused={this.state.focused}
                     onHourChange={this.onHourChanged}
@@ -102,7 +104,6 @@ class TimeInputField extends Component {
                     onFocusChange={this.onFocusChange}
                     time={toString(this.state.time)}
                     timeMode="12"
-                    draggable={false}
                 />
             </div>
         )
