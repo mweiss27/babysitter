@@ -36,7 +36,12 @@ class TimeInputField extends Component {
 
     @autobind
     onHourChanged(value) {
-        let nextTime = this.state.time.hour(value)
+        let previousHour = this.state.time.hour()
+        let nextHour = parseInt(value)
+        // If we were previously in the PM, whatever time we select should stay in the PM range
+        if (previousHour >= 12) nextHour += 12
+        console.log(`onHourchanged`, previousHour, nextHour)
+        let nextTime = this.state.time.hour(nextHour)
 
         this.setState(
             {
@@ -49,7 +54,8 @@ class TimeInputField extends Component {
 
     @autobind
     onMinuteChanged(value) {
-        let nextTime = this.state.time.minute(value)
+        let nextMinute = parseInt(value)
+        let nextTime = this.state.time.minute(nextMinute)
 
         this.setState(
             {
