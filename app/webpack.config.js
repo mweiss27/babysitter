@@ -17,23 +17,19 @@ module.exports = {
         }
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
-                loaders: ["babel-loader"],
+                use: ["babel-loader"],
                 include: path.join(__dirname, "src")
             },
             {
                 test: /\.s?css$/,
-                loaders: ["style-loader", "css-loader", "sass-loader"]
+                use: ["style-loader", "css-loader", "sass-loader"]
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 use: [{ loader: "file-loader?name=font/[name]__[hash:base64:5].[ext]" }]
-            },
-            {
-                include: /\.json$/,
-                loaders: ["json-loader"]
             }
         ]
     }

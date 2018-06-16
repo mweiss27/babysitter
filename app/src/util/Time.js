@@ -12,6 +12,8 @@ export const toMoment = s => {
             .minute(0)
             .second(0)
 
+    if (s.constructor !== String) return moment(null) //null is invalid, undefined is the current time
+
     return moment(s, TIME_FORMAT).second(0)
 }
 
@@ -21,6 +23,7 @@ export const toMoment = s => {
 export const toString = m => {
     const defaultReturn = "12:00AM"
     if (!m) return defaultReturn
+    if (m.constructor !== moment().constructor) return defaultReturn
 
     try {
         return m.format(TIME_FORMAT)
