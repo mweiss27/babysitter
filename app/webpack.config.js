@@ -11,6 +11,9 @@ module.exports = {
     resolve: {
         alias: {
             node_modules: path.join(__dirname, "node_modules"),
+            actions: path.join(__dirname, "src/actions"),
+            components: path.join(__dirname, "src/components"),
+            containers: path.join(__dirname, "containers"),
             styles: path.join(__dirname, "src/styles"),
             util: path.join(__dirname, "src/util")
         }

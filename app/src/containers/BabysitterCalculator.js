@@ -1,9 +1,13 @@
 import React, { Component } from "react"
-import TimePicker from "./components/TimePicker.js"
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
 import autobind from "autobind-decorator"
 
+import TimePicker from "components/TimePicker.js"
+
 import { Button } from "react-bootstrap"
-import { toMoment, isStartTimeValid, isBedTimeValid, isEndTimeValid } from "util/Time.js"
+import { setStartTime, setBedTime, setEndTime } from "actions/BabysitterCalculator.js"
+import { isStartTimeValid, isBedTimeValid, isEndTimeValid } from "util/Time.js"
 
 import "styles/babysittercalculator.scss"
 /**
@@ -16,37 +20,28 @@ import "styles/babysittercalculator.scss"
  * As well as a button to trigger the calculation and a section to display the result
  */
 class BabysitterCalculator extends Component {
-    state = {
-        startTime: toMoment("5:30PM"),
-        bedTime: toMoment("9:00PM"),
-        endTime: toMoment("12:00AM")
-    }
-
     @autobind
     onStartTimeChanged(value) {
-        this.setState({
-            startTime: value
-        })
+        this.props.setStartTime(value)
     }
 
     @autobind
     onBedTimeChanged(value) {
-        this.setState({
-            bedTime: value
-        })
+        this.props.setBedTime(value)
     }
 
     @autobind
     onEndTimeChanged(value) {
-        this.setState({
-            endTime: value
-        })
+        this.props.setEndTime(value)
     }
 
+    @autobind
+    performCalculation() {}
+
     render() {
-        let start = this.state.startTime
-        let bed = this.state.bedTime
-        let end = this.state.endTime
+        let start = this.props.babysitterCalculator.startTime
+        let bed = this.props.babysitterCalculator.bedTime
+        let end = this.props.babysitterCalculator.endTime
 
         let isStartValid = isStartTimeValid(start, bed, end)
         let isBedValid = isBedTimeValid(start, bed, end)
@@ -64,11 +59,32 @@ class BabysitterCalculator extends Component {
                     <TimePicker label="Bed Time" value={bed} valid={isBedValid} onChange={this.onBedTimeChanged} />
                     <TimePicker label="End Time" value={end} valid={isEndValid} onChange={this.onEndTimeChanged} />
                 </div>
-                <Button bsStyle="primary" bsSize="large" disabled={calculateButtonDisabled}>
+                <Button bsStyle="primary" bsSize="large" disabled={calculateButtonDisabled} onClick={this.performCalculation}>
                     Calculate
                 </Button>
             </div>
         )
     }
 }
-export default BabysitterCalculator
+
+function mapStateToProps(state) {
+    return {
+        babysitterCalculator: state.babysitterCalculator
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            setStartTime,
+            setBedTime,
+            setEndTime
+        },
+        dispatch
+    )
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(BabysitterCalculator)
