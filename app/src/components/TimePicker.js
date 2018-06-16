@@ -1,9 +1,9 @@
-import React, { Component } from "react"
+import React, { Component, PropTypes } from "react"
 import autobind from "autobind-decorator"
 import TimePicker from "react-times"
-import moment from "moment"
+import MomentPropTypes from "react-moment-proptypes"
 
-import { toString, toMoment } from "util/Time.js"
+import { toString } from "util/Time.js"
 
 import "styles/timepicker.scss"
 import "react-times/css/material/default.css"
@@ -14,6 +14,11 @@ import "react-times/css/material/default.css"
  *  A field to view or manually enter a time
  */
 class TimeInputField extends Component {
+    static propTypes = {
+        value: MomentPropTypes.momentObj,
+        onChange: PropTypes.func
+    }
+
     constructor(props) {
         super(props)
 
@@ -56,7 +61,8 @@ class TimeInputField extends Component {
 
     @autobind
     onMeridiemChanged(value) {
-        console.log(`[TimePicker.js - onMeridiemChanged] `, value, this.state.time.hour())
+        // We need to adjust our hour based on whether we are AM or PM
+        // Moment uses 24-hour when using .hour()
         let hour = this.state.time.hour()
         switch (value.toLowerCase()) {
             case "am":
