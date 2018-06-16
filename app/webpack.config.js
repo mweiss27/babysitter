@@ -11,7 +11,9 @@ module.exports = {
     },
     resolve: {
         alias: {
-            styles: path.join(__dirname, "styles")
+            node_modules: path.join(__dirname, "node_modules"),
+            styles: path.join(__dirname, "src/styles"),
+            util: path.join(__dirname, "src/util")
         }
     },
     module: {
@@ -28,6 +30,10 @@ module.exports = {
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 use: [{ loader: "file-loader?name=font/[name]__[hash:base64:5].[ext]" }]
+            },
+            {
+                include: /\.json$/,
+                loaders: ["json-loader"]
             }
         ]
     }
