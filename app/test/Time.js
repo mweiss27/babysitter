@@ -74,4 +74,77 @@ describe("Time", () => {
             assert.equal(result2, "12:00AM")
         })
     })
+
+    describe("Time.isStartTimeValid", () => {
+        it("5:00PM is valid", () => {
+            let m = Time.toMoment("5:00PM")
+
+            assert(Time.isStartTimeValid(m))
+        })
+
+        it("4:59PM is invalid", () => {
+            let m = Time.toMoment("4:59PM")
+
+            assert(!Time.isStartTimeValid(m))
+        })
+
+        it("4:00AM is invalid", () => {
+            let m = Time.toMoment("4:00AM")
+
+            assert(!Time.isStartTimeValid(m))
+        })
+
+        it("3:59AM is valid", () => {
+            let m = Time.toMoment("3:59AM")
+
+            assert(Time.isStartTimeValid(m))
+        })
+    })
+
+    describe("Time.isBedTimeValid", () => {
+        it("Should return true", () => {
+            assert(Time.isBedTimeValid())
+        })
+    })
+
+    describe("Time.isEndTimeValid", () => {
+        it("4:00AM is valid", () => {
+            let start = Time.toMoment("5:00PM")
+            let end = Time.toMoment("4:00AM")
+
+            assert(Time.isEndTimeValid(start, null, end))
+        })
+
+        it("4:01AM is invalid", () => {
+            let start = Time.toMoment("5:00PM")
+            let end = Time.toMoment("4:01AM")
+
+            assert(!Time.isEndTimeValid(start, null, end))
+        })
+
+        it("5:00PM is invalid", () => {
+            let start = Time.toMoment("5:00PM")
+            let end = Time.toMoment("5:00PM")
+
+            assert(!Time.isEndTimeValid(start, null, end))
+        })
+
+        it("5:01PM is valid", () => {
+            let start = Time.toMoment("5:00PM")
+            let end = Time.toMoment("5:01PM")
+
+            assert(Time.isEndTimeValid(start, null, end))
+        })
+
+        it("Any time before the start time is invalid", () => {
+            let start = Time.toMoment("10:30PM")
+            let end = Time.toMoment("10:00PM")
+
+            let start2 = Time.toMoment("12:30AM")
+            let end2 = Time.toMoment("11:30PM")
+
+            assert(!Time.isEndTimeValid(start, null, end))
+            assert(!Time.isEndTimeValid(start2, null, end2))
+        })
+    })
 })

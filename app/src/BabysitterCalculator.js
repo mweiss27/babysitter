@@ -3,7 +3,7 @@ import TimePicker from "./components/TimePicker.js"
 import autobind from "autobind-decorator"
 
 import { Button } from "react-bootstrap"
-import { toMoment } from "util/Time.js"
+import { toMoment, isStartTimeValid, isBedTimeValid, isEndTimeValid } from "util/Time.js"
 
 import "styles/babysittercalculator.scss"
 /**
@@ -44,15 +44,27 @@ class BabysitterCalculator extends Component {
     }
 
     render() {
+        let start = this.state.startTime
+        let bed = this.state.bedTime
+        let end = this.state.endTime
+
+        let isStartValid = isStartTimeValid(start, bed, end)
+        let isBedValid = isBedTimeValid(start, bed, end)
+        let isEndValid = isEndTimeValid(start, bed, end)
+
+        console.log(isStartValid, isBedValid, isEndValid)
+
+        let calculateButtonDisabled = !isStartValid || !isBedValid || !isEndValid
+
         return (
             <div id="babysitter-calculator">
                 <h2>Babysitter Calculator</h2>
                 <div id="babysitter-timepickers">
-                    <TimePicker label="Start Time" value={this.state.startTime} onChange={this.onStartTimeChanged} />
-                    <TimePicker label="Bed Time" value={this.state.bedTime} onChange={this.onBedTimeChanged} />
-                    <TimePicker label="End Time" value={this.state.endTime} onChange={this.onEndTimeChanged} />
+                    <TimePicker label="Start Time" value={start} valid={isStartValid} onChange={this.onStartTimeChanged} />
+                    <TimePicker label="Bed Time" value={bed} valid={isBedValid} onChange={this.onBedTimeChanged} />
+                    <TimePicker label="End Time" value={end} valid={isEndValid} onChange={this.onEndTimeChanged} />
                 </div>
-                <Button bsStyle="primary" bsSize="large">
+                <Button bsStyle="primary" bsSize="large" disabled={calculateButtonDisabled}>
                     Calculate
                 </Button>
             </div>

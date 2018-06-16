@@ -7,8 +7,8 @@ let server = new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath
 })
 
-server.listen(3000, "localhost", (err, result) => {
+server.listen(8080, "192.168.50.158", (err, result) => {
     if (err) return console.error(err)
 
-    opn("http://localhost:3000")
+    opn("http://192.168.50.158:8080")
 })

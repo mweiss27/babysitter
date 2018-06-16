@@ -2,7 +2,6 @@ var path = require("path")
 var webpack = require("webpack")
 
 module.exports = {
-    //"webpack-dev-server/client?http://localhost:3000",
     entry: ["./src/index.js"],
     output: {
         path: path.join(__dirname, "dist"),

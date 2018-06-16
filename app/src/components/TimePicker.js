@@ -80,7 +80,10 @@ class TimeInputField extends Component {
                 break
         }
 
-        let nextTime = this.state.time.hour(hour)
+        let nextDate
+        if (this.state.time.date() === 1) nextDate = 2
+        else nextDate = 1
+        let nextTime = this.state.time.hour(hour).date(nextDate)
 
         this.setState(
             {
