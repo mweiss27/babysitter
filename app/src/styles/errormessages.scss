@@ -1,0 +1,12 @@
+#error-messages {
+    display: flex;
+    flex-direction: column;
+
+    > ul {
+        > li {
+            color: red;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+    }
+}

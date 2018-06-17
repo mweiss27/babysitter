@@ -118,7 +118,7 @@ class TimeInputField extends Component {
                     onFocusChange={this.onFocusChange}
                     time={toString(this.state.time)}
                     timeMode="12"
-                    draggable={true}
+                    draggable={false}
                 />
             </div>
         )

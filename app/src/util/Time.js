@@ -1,4 +1,5 @@
 import moment from "moment"
+import Constants from "util/Constants.js"
 
 const TIME_FORMAT = "HH:mmA"
 
@@ -45,31 +46,32 @@ export const toString = m => {
 /**
  * The babysitter can start no earlier than 5:00PM
  */
-export const isStartTimeValid = (start, bed, end) => {
+export const getStartTimeError = (start, bed, end) => {
     let earliestStartTime = toMoment("5:00PM")
     let latestStartTime = toMoment("3:59AM")
 
-    if (start.isBefore(earliestStartTime)) return false
-    if (start.isAfter(latestStartTime)) return false
+    if (start.isBefore(earliestStartTime)) return Constants.CANNOT_START_BEFORE_5
+    if (start.isAfter(latestStartTime)) return Constants.CANNOT_START_AFTER_359
 
-    return true
+    return undefined
 }
 
-export const isBedTimeValid = (start, bed, end) => {
-    return true // They can go to bed whenever they want, really
+export const getBedTimeError = (start, bed, end) => {
+    return undefined // They can go to bed whenever they want, really
 }
 
 /**
  * The babysitter can stay no later than 4:00AM
  */
-export const isEndTimeValid = (start, bed, end) => {
+export const getEndTimeError = (start, bed, end) => {
     // Can't end before you start
-    if (end.isBefore(start)) return false
+    if (end.isBefore(start)) return Constants.CANNOT_END_BEFORE_START
+
     let earliestEndTime = toMoment("5:01PM")
     let latestEndTime = toMoment("4:00AM")
 
-    if (end.isBefore(earliestEndTime)) return false
-    if (end.isAfter(latestEndTime)) return false
+    if (end.isBefore(earliestEndTime)) return Constants.CANNOT_END_BEFORE_501
+    if (end.isAfter(latestEndTime)) return Constants.CANNOT_END_AFTER_4
 
-    return true
+    return undefined
 }

@@ -7,9 +7,10 @@ import TimePicker from "components/TimePicker.js"
 
 import { Button } from "react-bootstrap"
 import { setStartTime, setBedTime, setEndTime } from "actions/BabysitterCalculator.js"
+import { setErrors } from "actions/ErrorMessages.js"
 import { setCalculationResult } from "actions/CalculationResult.js"
 
-import { isStartTimeValid, isBedTimeValid, isEndTimeValid } from "util/Time.js"
+import { getStartTimeError, getBedTimeError, getEndTimeError } from "util/Time.js"
 import { calculateResult } from "util/Calculator.js"
 
 import "styles/babysittercalculator.scss"
@@ -55,27 +56,38 @@ class BabysitterCalculator extends Component {
         let bed = this.props.babysitterCalculator.bedTime
         let end = this.props.babysitterCalculator.endTime
 
-        let isStartValid = isStartTimeValid(start, bed, end)
-        let isBedValid = isBedTimeValid(start, bed, end)
-        let isEndValid = isEndTimeValid(start, bed, end)
+        let startError = getStartTimeError(start, bed, end)
+        let bedError = getBedTimeError(start, bed, end)
+        let endError = getEndTimeError(start, bed, end)
 
-        console.log(isStartValid, isBedValid, isEndValid)
+        let errors = [startError, bedError, endError].filter(e => e !== undefined)
+        this.errors = errors
 
-        let calculateButtonDisabled = !isStartValid || !isBedValid || !isEndValid
+        console.log(startError, bedError, endError)
+
+        let calculateButtonDisabled = startError !== undefined || bedError !== undefined || endError !== undefined
 
         return (
             <div id="babysitter-calculator">
                 <h2>Babysitter Calculator</h2>
                 <div id="babysitter-timepickers">
-                    <TimePicker label="Start Time" value={start} valid={isStartValid} onChange={this.onStartTimeChanged} />
-                    <TimePicker label="Bed Time" value={bed} valid={isBedValid} onChange={this.onBedTimeChanged} />
-                    <TimePicker label="End Time" value={end} valid={isEndValid} onChange={this.onEndTimeChanged} />
+                    <TimePicker label="Start Time" value={start} valid={startError === undefined} onChange={this.onStartTimeChanged} />
+                    <TimePicker label="Bed Time" value={bed} valid={bedError === undefined} onChange={this.onBedTimeChanged} />
+                    <TimePicker label="End Time" value={end} valid={endError === undefined} onChange={this.onEndTimeChanged} />
                 </div>
                 <Button bsStyle="primary" bsSize="large" disabled={calculateButtonDisabled} onClick={this.performCalculation}>
                     Calculate
                 </Button>
             </div>
         )
+    }
+
+    componentDidUpdate() {
+        if (this.errors) {
+            console.log(`Setting errors to`, this.errors)
+            this.props.setErrors(this.errors)
+        }
+        this.props.setCalculationResult(null) // Clear our calculation result
     }
 }
 
@@ -91,7 +103,7 @@ function mapDispatchToProps(dispatch) {
             setStartTime,
             setBedTime,
             setEndTime,
-
+            setErrors,
             setCalculationResult
         },
         dispatch

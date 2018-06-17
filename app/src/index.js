@@ -6,6 +6,7 @@ import { Provider } from "react-redux"
 
 import store from "./store.js"
 import BabysitterCalculator from "./containers/BabysitterCalculator.js"
+import ErrorMessages from "./containers/ErrorMessages.js"
 import CalculationResult from "./containers/CalculationResult"
 
 let mount = document.createElement("div")
@@ -16,6 +17,7 @@ ReactDOM.render(
     <Provider store={store}>
         <div id="app">
             <BabysitterCalculator />
+            <ErrorMessages />
             <CalculationResult />
         </div>
     </Provider>,
