@@ -21,7 +21,7 @@ I want to calculate my nightly charge<br>_
 
 ## Assumptions
 
-The client is billed only after a full hour of work has been completed.
+The client is billed only after a full hour of work has been completed.<br>
 The client is billed for the highest applicable amount that occurred during the hour
 
 e.g. If the child went to bed at 8:45PM, then during the time of 8:00PM-8:59PM,
@@ -35,17 +35,17 @@ we met two conditions:
 
 Node.js is required to run the project locally
 
-- You can find the appropriate installer for your system [here](https://nodejs.org/en/download/)
-  Once installed, clone (or download as a zip) this repository
-  Navigate to the directory you cloned (or extracted) to in Command Prompt (Terminal on Mac OS/Linux)
-  cd app
-  npm install
+- You can find the appropriate installer for your system [here](https://nodejs.org/en/download/)<br>
+  Once installed, clone (or download as a zip) this repository<br>
+  Navigate to the directory you cloned (or extracted) to in Command Prompt (Terminal on Mac OS/Linux)<br>
+  cd app<br>
+  npm install<br>
 
 ## Running
 
-After npm install has run successfully:
-npm run start
-Your browser should automatically open to the webpage for the locally-hosted application
-If it does not, browse to http://localhost:3000
+After npm install has run successfully:<br>
+npm run start<br>
+Your browser should automatically open to the webpage for the locally-hosted application<br>
+If it does not, browse to http://localhost:3000<br>
 
-- The page will load for a few seconds at the very start while the application finishes bundling
+- The page will load for a few seconds at the very start while the application finishes bundling<br>
