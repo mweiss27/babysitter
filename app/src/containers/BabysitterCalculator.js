@@ -47,7 +47,7 @@ class BabysitterCalculator extends Component {
 
         let result = calculateResult(start, bed, end)
 
-        console.log(`Setting calculation result to ${result}`)
+        // console.log(`Setting calculation result to ${result}`)
         this.props.setCalculationResult(result)
     }
 
@@ -63,7 +63,7 @@ class BabysitterCalculator extends Component {
         let errors = [startError, bedError, endError].filter(e => e !== undefined)
         this.errors = errors
 
-        console.log(startError, bedError, endError)
+        // console.log(startError, bedError, endError)
 
         let calculateButtonDisabled = startError !== undefined || bedError !== undefined || endError !== undefined
 
@@ -84,7 +84,7 @@ class BabysitterCalculator extends Component {
 
     componentDidUpdate() {
         if (this.errors) {
-            console.log(`Setting errors to`, this.errors)
+            // console.log(`Setting errors to`, this.errors)
             this.props.setErrors(this.errors)
         }
         this.props.setCalculationResult(null) // Clear our calculation result

@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import "styles/errormessages.scss"
 class ErrorMessages extends Component {
     render() {
-        console.log(`Rendering ErrorMessages with errors:`, this.props.errors)
+        // console.log(`Rendering ErrorMessages with errors:`, this.props.errors)
         return (
             <div id="error-messages">
                 <ul>

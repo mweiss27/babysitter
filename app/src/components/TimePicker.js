@@ -41,7 +41,7 @@ class TimeInputField extends Component {
         let nextHour = parseInt(value)
         // If we were previously in the PM, whatever time we select should stay in the PM range
         if (previousHour >= 12) nextHour += 12
-        console.log(`onHourchanged`, previousHour, nextHour)
+        // console.log(`onHourchanged`, previousHour, nextHour)
         let nextTime = this.state.time.hour(nextHour)
 
         this.setState(
@@ -72,7 +72,7 @@ class TimeInputField extends Component {
         // We need to adjust our hour based on whether we are AM or PM
         // Moment uses 24-hour when using .hour()
         let hour = this.state.time.hour()
-        console.log(`onMeridiemChanged - ${value} `, hour)
+        // console.log(`onMeridiemChanged - ${value} `, hour)
         switch (value.toLowerCase()) {
             case "am":
                 if (hour >= 12) hour -= 12

@@ -21,6 +21,7 @@ I want to calculate my nightly charge<br>_
 
 ## Assumptions
 
+The client is billed only after a full hour of work has been completed.
 The client is billed for the highest applicable amount that occurred during the hour
 
 e.g. If the child went to bed at 8:45PM, then during the time of 8:00PM-8:59PM,
@@ -29,3 +30,22 @@ we met two conditions:
 - $12/hour from start-time to bedtime
 - $8/hour from bedtime to midnight<br>
   The client will be billed $12 for this hour.
+
+## Installation
+
+Node.js is required to run the project locally
+
+- You can find the appropriate installer for your system [here](https://nodejs.org/en/download/)
+  Once installed, clone (or download as a zip) this repository
+  Navigate to the directory you cloned (or extracted) to in Command Prompt (Terminal on Mac OS/Linux)
+  cd app
+  npm install
+
+## Running
+
+After npm install has run successfully:
+npm run start
+Your browser should automatically open to the webpage for the locally-hosted application
+If it does not, browse to http://localhost:3000
+
+- The page will load for a few seconds at the very start while the application finishes bundling
